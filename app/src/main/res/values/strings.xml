@@ -17,4 +17,5 @@
     <string name="waistlineNormal">腰圍正常</string>
     <string name="waistlineUnNormal">腰圍不正常</string>
     <string name="imageDescription">Result Image</string>
+    <string name="inputNotValid">請檢查輸入</string>
 </resources>

@@ -13,17 +13,17 @@ class BMIViewModel(private val application: Application) : AndroidViewModel(appl
     private var _uiState = MutableStateFlow(BMIUIState())
     val uiState: StateFlow<BMIUIState> = _uiState.asStateFlow()
 
-    fun calculateBMI() {
-        if (uiState.value.height.isEmpty() || _uiState.value.weight.isEmpty()) return
+    fun calculateBMI(): Boolean {
+        if (uiState.value.height.isEmpty() || _uiState.value.weight.isEmpty()) return false
         val height: Double
         val weight: Double
         try {
             height = _uiState.value.height.toDouble()
             weight = _uiState.value.weight.toDouble()
         } catch (e: NumberFormatException) {
-            return
+            return false
         }
-        if (height <= 0 || weight <= 0) return
+        if (height <= 0 || weight <= 0) return false
         val bmi = weight / (0.0001 * height * height)
         updateImageResource(bmi)
         _uiState.update { currentState ->
@@ -35,6 +35,7 @@ class BMIViewModel(private val application: Application) : AndroidViewModel(appl
                 isResultDialogOpen = true
             )
         }
+        return true
     }
 
     private fun getBMIResult(bmi: Double): String {

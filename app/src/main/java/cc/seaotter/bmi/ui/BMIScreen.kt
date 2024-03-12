@@ -1,5 +1,6 @@
 package cc.seaotter.bmi.ui
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -32,12 +33,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
@@ -104,7 +107,7 @@ fun BMICardLayout(
     height: String,
     weight: String,
     waistline: String,
-    onButtonClick: () -> Unit
+    onButtonClick: () -> Boolean
 ) {
     var genderSelectedIndex by remember { mutableIntStateOf(0) }
     val genderOptions =
@@ -164,9 +167,26 @@ fun BMICardLayout(
                     .padding(8.dp)
             ) {
                 Spacer(modifier = Modifier.weight(1f))
-                Button(onClick = onButtonClick) {
+                val context = LocalContext.current
+                var isInputValid by remember { mutableStateOf(true) }
+                Button(onClick = {
+                    isInputValid = onButtonClick()
+                }) {
                     Text(text = stringResource(id = R.string.calculate))
                 }
+                when {
+                    !isInputValid -> {
+                        isInputValid = true
+                        Toast.makeText(
+                            context,
+                            stringResource(id = R.string.inputNotValid),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+
+                    else -> {}
+                }
+
             }
         }
     }
