@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BMI 計算機</string>
+    <string name="waistline">腰圍（cm）</string>
+    <string name="weight">體重（kg）</string>
+    <string name="height">身高（cm）</string>
+    <string name="tooLight">過輕</string>
+    <string name="normal">正常</string>
+    <string name="tooHeavy">過重</string>
+    <string name="mildObesity">輕度肥胖</string>
+    <string name="moderatelyObese">中度肥胖</string>
+    <string name="severeObesity">重度肥胖</string>
+    <string name="boy">男生</string>
+    <string name="girl">女生</string>
+    <string name="calculate">計算</string>
+    <string name="confirm">知道了</string>
+    <string name="resultTitle">計算結果</string>
+    <string name="waistlineNormal">腰圍正常</string>
+    <string name="waistlineUnNormal">腰圍不正常</string>
+    <string name="imageDescription">Result Image</string>
+</resources>
